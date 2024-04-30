@@ -45,14 +45,8 @@ namespace Plugins
                             throw new InvalidPluginExecutionException("O campo NIF é obrigatório.");
                         }
                     }
-                    var attributeValue = entity.GetAttributeValue<string>("new_nif");
-                    if (attributeValue == string.Empty)
-                    {
-                        tracingService.Trace("NIF: " + attributeValue);
-                        throw new InvalidPluginExecutionException("O campo NIF é obrigatório.");
 
                     }
-                }
                 catch (FaultException<OrganizationServiceFault> ex)
                 {
                     throw new InvalidPluginExecutionException("An error occurred in FillAField in the Plugins Solution.", ex);
