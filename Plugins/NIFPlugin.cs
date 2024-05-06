@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xrm.Sdk;
 using System.ServiceModel;
 
-namespace Plugins
+namespace NIFWarning
 {
     public class NIFPlugin : IPlugin
     {
@@ -32,11 +32,13 @@ namespace Plugins
                 {
                     // Obtain the target entity from the input parameters.
                     Entity entity = (Entity)context.InputParameters["Target"];
+                    tracingService.Trace("FillAField: {0}");
                 try
                 {
                     if (!entity.Attributes.Contains("new_nif"))
                     {
                         throw new InvalidPluginExecutionException("O campo NIF é obrigatório.");
+                       
                     }
                     else
                     {
@@ -46,7 +48,7 @@ namespace Plugins
                         }
                     }
 
-                    }
+                }
                 catch (FaultException<OrganizationServiceFault> ex)
                 {
                     throw new InvalidPluginExecutionException("An error occurred in FillAField in the Plugins Solution.", ex);
